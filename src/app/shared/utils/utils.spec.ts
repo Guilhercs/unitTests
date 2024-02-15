@@ -1,9 +1,19 @@
-import { pluck, range } from './utils';
+import { TestBed } from '@angular/core/testing';
+import { UtilsService } from './utils';
 
 describe('utils', () => {
+  let service: UtilsService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [UtilsService],
+    });
+    service = TestBed.inject(UtilsService);
+  });
+
   describe('range', () => {
     it('returns correct range from 1 to 5', () => {
-      expect(range(1, 5)).toEqual([1, 2, 3, 4]);
+      expect(service.range(1, 5)).toEqual([1, 2, 3, 4]);
     });
   });
   describe('pluck', () => {
@@ -13,7 +23,7 @@ describe('utils', () => {
         { id: '2', name: 'bar' },
         { id: '3', name: 'baz' },
       ];
-      expect(pluck(data, 'id')).toEqual(['1', '2', '3']);
+      expect(service.pluck(data, 'id')).toEqual(['1', '2', '3']);
     });
   });
 });

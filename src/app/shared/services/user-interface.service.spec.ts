@@ -2,12 +2,21 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserInterfaceService } from './user-interface.service';
 import { UserInterface } from '../interface/user-interface';
+import { UtilsService } from '../utils/utils';
 
 describe('UserInterfaceService', () => {
   let service: UserInterfaceService;
+  const utilsServiceMock = {
+    pluck: jest.fn(),
+  };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        UserInterfaceService,
+        { provide: UtilsService, useValue: utilsServiceMock },
+      ],
+    });
     service = TestBed.inject(UserInterfaceService);
   });
 
@@ -35,6 +44,14 @@ describe('UserInterfaceService', () => {
       service.removeUser('2');
 
       expect(service.users).toEqual([]);
+    });
+  });
+
+  describe('#getUsernames', () => {
+    it('should get usernames', () => {
+      jest.spyOn(TestBed.inject(UtilsService), 'pluck');
+      //utilsServiceMock.pluck.mockReturnValue(['foo']);
+      expect(service.getUsernames()).toEqual(['foo']);
     });
   });
 });

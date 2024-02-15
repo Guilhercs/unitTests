@@ -1,8 +1,12 @@
-export const range = (start: number, end: number): number[] => {
-  return [...Array(end - start).keys()].map((el) => el + start);
-};
+import { Injectable } from '@angular/core';
 
-export const pluck = (elements: any[], field: string) => {
-  return elements.map((el) => el[field]);
-};
+@Injectable()
+export class UtilsService {
+  range = (start: number, end: number): number[] => {
+    return [...Array(end - start).keys()].map((el) => el + start);
+  };
 
+  pluck = (elements: any[], field: string) => {
+    return elements.map((el) => el[field]);
+  };
+}
