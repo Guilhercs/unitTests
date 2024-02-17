@@ -3,9 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TagInterface } from '../../interface/tag-intergace';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiService {
   #http = inject(HttpClient);
   apiUrl = 'https://localhost:3004';
